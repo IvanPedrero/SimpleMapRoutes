@@ -15,6 +15,8 @@
 		8212B200232DC2B50001C00D /* MapLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8212B1FF232DC2B50001C00D /* MapLocationTests.swift */; };
 		8212B20B232DC2B50001C00D /* MapLocationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8212B20A232DC2B50001C00D /* MapLocationUITests.swift */; };
 		8212B21A232DC3200001C00D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8212B219232DC3200001C00D /* CoreLocation.framework */; };
+		826ABB1223310C07008B3721 /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826ABB1123310C07008B3721 /* HealthKitController.swift */; };
+		826ABB1523310C75008B3721 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826ABB1423310C75008B3721 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,9 @@
 		8212B20A232DC2B50001C00D /* MapLocationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationUITests.swift; sourceTree = "<group>"; };
 		8212B20C232DC2B50001C00D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8212B219232DC3200001C00D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		826ABB1123310C07008B3721 /* HealthKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
+		826ABB1323310C75008B3721 /* MapLocation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MapLocation.entitlements; sourceTree = "<group>"; };
+		826ABB1423310C75008B3721 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8212B21A232DC3200001C00D /* CoreLocation.framework in Frameworks */,
+				826ABB1523310C75008B3721 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +107,10 @@
 		8212B1E9232DC2B30001C00D /* MapLocation */ = {
 			isa = PBXGroup;
 			children = (
+				826ABB1323310C75008B3721 /* MapLocation.entitlements */,
 				8212B1EA232DC2B30001C00D /* AppDelegate.swift */,
 				8212B1EC232DC2B30001C00D /* ViewController.swift */,
+				826ABB1123310C07008B3721 /* HealthKitController.swift */,
 				8212B1EE232DC2B30001C00D /* Main.storyboard */,
 				8212B1F1232DC2B50001C00D /* Assets.xcassets */,
 				8212B1F3232DC2B50001C00D /* LaunchScreen.storyboard */,
@@ -132,6 +140,7 @@
 		8212B218232DC3200001C00D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				826ABB1423310C75008B3721 /* HealthKit.framework */,
 				8212B219232DC3200001C00D /* CoreLocation.framework */,
 			);
 			name = Frameworks;
@@ -205,6 +214,11 @@
 				TargetAttributes = {
 					8212B1E6232DC2B30001C00D = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					8212B1FA232DC2B50001C00D = {
 						CreatedOnToolsVersion = 10.3;
@@ -270,6 +284,7 @@
 			files = (
 				8212B1ED232DC2B30001C00D /* ViewController.swift in Sources */,
 				8212B1EB232DC2B30001C00D /* AppDelegate.swift in Sources */,
+				826ABB1223310C07008B3721 /* HealthKitController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MapLocation/MapLocation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4BZAVK285L;
 				INFOPLIST_FILE = MapLocation/Info.plist;
@@ -462,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MapLocation/MapLocation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4BZAVK285L;
 				INFOPLIST_FILE = MapLocation/Info.plist;

@@ -21,6 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDe
     //Button to restore the location
     @IBAction func restoreButton(_ sender: Any) {
         goToLastLocation()
+        getHospitals()
     }
     
     //Button that searches for location
@@ -85,6 +86,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDe
                 
                 //Get directions
                 self.getDirections(coordinate: coordinate)
+                self.getHospitals()
             }
         }
     }
@@ -156,13 +158,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDe
         self.map.showsUserLocation = true
     }
     
+    func getHospitals(){
+        let annotations = self.map.annotations
+        self.map.removeAnnotations(annotations)
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = "Hospital"
+        request.region = self.map.region
+        
+        let search = MKLocalSearch(request: request)
+        search.start { response, error in
+            guard let response = response else {
+                print(error!)
+                return
+            }
+            
+            for mapItem in response.mapItems {
+                // Display the received items
+                let latitude = mapItem.placemark.location?.coordinate.latitude
+                let longitude = mapItem.placemark.location?.coordinate.longitude
+                
+                let hospital = MKPointAnnotation()
+                hospital.title = mapItem.name! //Only do `!` if you are sure that it isn't nil
+                hospital.coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+                self.map.addAnnotation(hospital)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         manager.delegate = self                             //The manager will be in this screen controller
         manager.desiredAccuracy = kCLLocationAccuracyBest   //We need the best location
+        /*
+         Yoltic, here you have to request the authorization using BIOMETRICS instead of the requestInUse()
+         */
         manager.requestWhenInUseAuthorization()             //Request authorization
         manager.startUpdatingLocation()                     //Start updating the location for the app
+        
+        getHospitals()
         
     }
     
